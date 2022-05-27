@@ -1,0 +1,24 @@
+package com.hoaxify.user;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
+    // UniqueUsername is our annotation
+    // String is the object type we are validating
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+
+        User inDB = userRepository.findByUsername(value);
+        if (inDB == null) {
+            return true;
+        }
+        return false;
+    }
+}

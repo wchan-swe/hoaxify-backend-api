@@ -1,5 +1,7 @@
 package com.hoaxify.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +10,7 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
+@JsonInclude(value = Include.NON_NULL)
 public class ApiError {
 
     private long timestamp = new Date().getTime();
